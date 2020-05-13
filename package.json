@@ -1,14 +1,11 @@
 {
   "name": "ticket-api",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "Ticket API",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js"
-  },
-  "engines": {
-    "node": "10.x"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "author": "Omar <omar.mo.sid@gmail.com>",
   "license": "MIT",
