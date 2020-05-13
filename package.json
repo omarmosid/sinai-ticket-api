@@ -1,0 +1,21 @@
+{
+  "name": "ticket-api",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false "
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "author": "Omar <omar.mo.sid@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.13"
+  }
+}
