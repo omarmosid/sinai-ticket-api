@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false "
+    "server": "nodemon index.js"
   },
   "engines": {
     "node": "10.x"
