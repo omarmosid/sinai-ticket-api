@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const connectDB = require("./config/db");
 
+const PORT = 4000 || process.env.PORT;
+
 // Connect DB
 connectDB();
 
@@ -10,10 +12,15 @@ app.use(express.json());
 
 app.use("/api/tickets", require('./routes/api/ticket'))
 
+app.get("/", (req, res) => {
+  res.send("Hello!");
+});
+
+
 app.get("/api", (req, res) => {
   res.send("Hello!");
 });
 
-app.listen(4000, () => {
-  console.log(`listening on 4000`);
+app.listen(PORT, () => {
+  console.log(`listening on ${PORT}`);
 });
