@@ -1,6 +1,6 @@
-const mangoose = require('mangoose');
+const mongoose = require('mongoose');
 
-const UserSchema = new mangoose.Schema({
+const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -20,7 +20,8 @@ const UserSchema = new mangoose.Schema({
     required: true
   },
   avatar: {
-    type: String
+    type: String,
+    default: 'https://api.adorable.io/avatars/40/abott@adorable.png'
   },
   date: {
     type: Date,
