@@ -51,4 +51,21 @@ router.post("/", async (req, res) => {
   }
 })
 
+// @route    DELETE api/users
+// @desc     delete a user
+// @access   Public
+router.delete("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    await user.remove();
+
+    return res.json({
+      msg: "User has been deleted"
+    })
+  } catch(err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+})
+
 module.exports = router
