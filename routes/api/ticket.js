@@ -10,9 +10,9 @@ router.get("/", async (req, res) => {
   try {
     const tickets = await Ticket.find().sort({ date: -1 });
     res.json(tickets);
-  } catch(err) {
+  } catch (err) {
     console.log(err);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
@@ -23,9 +23,9 @@ router.get("/:id", async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id);
     res.json(ticket);
-  } catch(err) {
+  } catch (err) {
     console.log(err);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
@@ -63,13 +63,13 @@ router.delete("/:id", async (req, res) => {
     await ticketToBeDeleted.remove();
 
     res.json({
-      msg: 'Ticket Removed'
-    })
-  } catch(err) {
+      msg: "Ticket Removed",
+    });
+  } catch (err) {
     console.log(err);
     res.status(500).send("Server Error");
   }
-})
+});
 
 // @route    PUT api/tickets/status/:id
 // @desc     Close a ticket
@@ -79,24 +79,39 @@ router.put("/status/:id", async (req, res) => {
     const ticket = await Ticket.findById(req.params.id);
 
     // Check if ticket already closed
-    if(ticket.status === 'closed') {
+    if (ticket.status === "closed") {
       return res.status(400).json({
-        msg: 'Already Closed'
-      })
+        msg: "Already Closed",
+      });
     }
 
-    ticket.status = 'closed'
-    const modifiedTicket = await ticket.save()
+    ticket.status = "closed";
+    const modifiedTicket = await ticket.save();
 
     return res.json(modifiedTicket);
-  } catch(err) {
+  } catch (err) {
     console.log(err);
     res.status(500).send("Server Error");
   }
-})
-
+});
 
 // Get all comments
-// Add comment to a ticket
+// Add comment to a ticket/Modify a ticket and edit the comment array
+router.put("/comments/:id", async (req, res) => {
+  try {
+    const ticket = await Ticket.findById(req.params.id);
+    
+    ticket.comments.unshift({
+      content: req.body.content,
+      author: req.body.author
+    })
+
+    const modifiedTicket = await ticket.save();
+    return res.json(modifiedTicket)
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
