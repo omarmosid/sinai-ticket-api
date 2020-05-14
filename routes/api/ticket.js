@@ -95,8 +95,9 @@ router.put("/status/:id", async (req, res) => {
   }
 });
 
-// Get all comments
-// Add comment to a ticket/Modify a ticket and edit the comment array
+// @route    PUT api/comments/:id
+// @desc     Add a comment
+// @access   Public
 router.put("/comments/:id", async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id);
