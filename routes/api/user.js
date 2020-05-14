@@ -37,6 +37,7 @@ router.post("/", async (req, res) => {
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
+      username: req.body.username,
       role: req.body.role,
       password: req.body.password
     });
@@ -46,7 +47,7 @@ router.post("/", async (req, res) => {
 
   } catch(err) {
     console.log(err);
-    res.status(500).send("Server Error");
+    res.status(500).send(err);
   }
 })
 
