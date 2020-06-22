@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.use("/api/tickets", require('./routes/api/ticket'))
 app.use("/api/users", require('./routes/api/user'))
+app.use("/api/auth", require('./routes/api/auth'))
 
 app.get("/", (req, res) => {
   res.send("Hello!");
