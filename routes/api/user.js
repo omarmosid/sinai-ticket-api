@@ -5,6 +5,7 @@ const bycrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../../models/User");
+const auth = require("../../middleware/auth");
 
 // @route    GET api/users
 // @desc     Get all users
@@ -13,6 +14,19 @@ router.get("/", async (req, res) => {
   try {
     const users = await User.find().sort({ date: -1 });
     res.json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error");
+  }
+});
+
+// @route    GET api/me
+// @desc     Get loggedin user data
+// @access   Private
+router.get("/me", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user)
   } catch (err) {
     console.log(err);
     res.status(500).send("Server error");
@@ -31,6 +45,7 @@ router.get("/:id", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
 
 // @route    POST api/users
 // @desc     create a user

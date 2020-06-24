@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const Ticket = require("../../models/Ticket");
+const auth = require("../../middleware/auth");
 
 // @route    GET api/tickets
 // @desc     Get all tickets
-// @access   Public
+// @access   Private
 router.get("/", async (req, res) => {
   try {
     const tickets = await Ticket.find().sort({ date: -1 });
@@ -18,8 +19,8 @@ router.get("/", async (req, res) => {
 
 // @route    GET api/tickets/:id
 // @desc     Get a specific ticket
-// @access   Public
-router.get("/:id", async (req, res) => {
+// @access   Private
+router.get("/:id", auth, async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id);
     res.json(ticket);
@@ -31,8 +32,8 @@ router.get("/:id", async (req, res) => {
 
 // @route    POST api/tickets
 // @desc     Create a ticket
-// @access   Public
-router.post("/", async (req, res) => {
+// @access   Private
+router.post("/", auth, async (req, res) => {
   try {
     // Construct new ticket object
     const newTicket = new Ticket({

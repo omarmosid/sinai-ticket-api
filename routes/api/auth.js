@@ -17,6 +17,9 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// @route    POST api/auth
+// @desc     Login a user
+// @access   Public
 router.post(
   "/",
   [
@@ -35,6 +38,7 @@ router.post(
     try {
       // Check to see if user exists
       let user = await User.findOne({ email });
+      // No user exists with email
       if (!user) {
         return res
           .status(400)
@@ -49,7 +53,7 @@ router.post(
       if (!isMatch) {
         return res
           .status(400)
-          .json({ errors: [{ msg: `Invalid credentials. User with ${email} doesn't exist.` }] });
+          .json({ errors: [{ msg: `Incorrect password` }] });
       }
 
       // Sign with JWT
