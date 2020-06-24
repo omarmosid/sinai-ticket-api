@@ -42,6 +42,7 @@ router.post("/", auth, async (req, res) => {
       status: req.body.status,
       category: req.body.category,
       assignedTo: req.body.assignedTo,
+      createdBy: req.body.createdBy
     });
 
     // Save constructed object to DB
