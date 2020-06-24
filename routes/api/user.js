@@ -38,7 +38,7 @@ router.get("/me", auth, async (req, res) => {
 // @access   Public
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).select("-password");
     res.json(user);
   } catch (err) {
     console.log(err);
