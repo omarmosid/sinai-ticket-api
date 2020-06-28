@@ -59,7 +59,7 @@ router.post("/", auth, async (req, res) => {
 // @route    DELETE api/tickets/:id
 // @desc     Delete a ticket
 // @access   Public
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     const ticketToBeDeleted = await Ticket.findById(req.params.id);
     await ticketToBeDeleted.remove();
@@ -76,7 +76,7 @@ router.delete("/:id", async (req, res) => {
 // @route    PUT api/tickets/status/:id
 // @desc     Close a ticket
 // @access   Public
-router.put("/status/:id", async (req, res) => {
+router.put("/status/:id", auth, async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id);
 
@@ -100,7 +100,7 @@ router.put("/status/:id", async (req, res) => {
 // @route    PUT api/comments/:id
 // @desc     Add a comment
 // @access   Public
-router.put("/comments/:id", async (req, res) => {
+router.put("/comments/:id", auth, async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id);
     

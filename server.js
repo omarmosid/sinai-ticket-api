@@ -1,20 +1,21 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
-const cors = require('cors')
+const cors = require("cors");
+
 const app = express();
-const path = require('path');
+const path = require("path");
 const connectDB = require("./config/db");
 
 // Connect DB
 connectDB();
 
 // Init Middleware
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
-app.use("/api/tickets", require('./routes/api/ticket'))
-app.use("/api/users", require('./routes/api/user'))
-app.use("/api/auth", require('./routes/api/auth'))
+app.use("/api/tickets", require("./routes/api/ticket"));
+app.use("/api/users", require("./routes/api/user"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 app.get("/", (req, res) => {
   res.send("Hello!");
